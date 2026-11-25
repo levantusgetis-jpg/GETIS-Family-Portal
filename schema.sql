@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS documents (
  mime TEXT NOT NULL,
  size INTEGER NOT NULL,
  object_key TEXT NOT NULL,
+ data_base64 TEXT,
  uploaded_by INTEGER REFERENCES users(id),
  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
