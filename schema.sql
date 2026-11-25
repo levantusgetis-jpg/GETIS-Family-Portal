@@ -39,3 +39,5 @@ CREATE TABLE IF NOT EXISTS audit_log (
  detail TEXT,
  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_single_patriarch ON users(role) WHERE role='patriarch';
