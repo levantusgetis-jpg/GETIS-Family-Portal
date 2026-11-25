@@ -2,7 +2,7 @@ const COOKIE="getis.sid",TTL=28800,enc=new TextEncoder();
 const json=(v,s=200,h={})=>new Response(JSON.stringify(v),{status:s,headers:{"content-type":"application/json; charset=utf-8","cache-control":"no-store",...h}});
 const err=(m,s=400)=>json({error:m},s),hex=(n=32)=>Array.from(crypto.getRandomValues(new Uint8Array(n)),x=>x.toString(16).padStart(2,"0")).join("");
 const b64=b=>btoa(String.fromCharCode(...new Uint8Array(b)));
-async function hash(p,s=crypto.getRandomValues(new Uint8Array(16))){const k=await crypto.subtle.importKey("raw",enc.encode(p),"PBKDF2",false,["deriveBits"]),v=await crypto.subtle.deriveBits({name:"PBKDF2",salt:s,iterations:310000,hash:"SHA-256"},k,256);return "pbkdf2$310000$"+b64(s)+"$"+b64(v)}
+async function hash(p,s=crypto.getRandomValues(new Uint8Array(16))){const k=await crypto.subtle.importKey("raw",enc.encode(p),"PBKDF2",false,["deriveBits"]),v=await crypto.subtle.deriveBits({name:"PBKDF2",salt:s,iterations:100000,hash:"SHA-256"},k,256);return "pbkdf2$100000$"+b64(s)+"$"+b64(v)}
 async function verify(p,h){try{const [a,it,ss,expect]=h.split("$");if(a!=="pbkdf2")return false;const s=Uint8Array.from(atob(ss),c=>c.charCodeAt(0)),k=await crypto.subtle.importKey("raw",enc.encode(p),"PBKDF2",false,["deriveBits"]),v=await crypto.subtle.deriveBits({name:"PBKDF2",salt:s,iterations:+it,hash:"SHA-256"},k,256);return b64(v)===expect}catch{return false}}
 const ck=(v,age)=>COOKIE+"="+v+"; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age="+age;
 function sid(req){const p=(req.headers.get("Cookie")||"").split(";").map(x=>x.trim()).find(x=>x.startsWith(COOKIE+"="));return p?p.slice(COOKIE.length+1):null}
