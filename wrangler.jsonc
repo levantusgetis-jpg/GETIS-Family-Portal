@@ -4,6 +4,6 @@
   "main": "src/worker.js",
   "compatibility_date": "2026-11-25",
   "assets": {"directory":"./public","binding":"ASSETS","run_worker_first":true},
-  "d1_databases":[{"binding":"DB","database_name":"getis-family-db","database_id":"REPLACE_WITH_D1_DATABASE_ID"}],
+  "d1_databases":[{"binding":"DB","database_name":"getis-family-db","database_id":"48e70b2e-8794-49ef-9007-a9b2a48ead2e"}],
   "r2_buckets":[{"binding":"FILES","bucket_name":"getis-family-files"}]
 }
