@@ -1,4 +1,4 @@
-name: Build GETIS Android APK
+name: Build GETIS Android APK (APK artifact)
 on:
   workflow_dispatch:
   push:
