@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17251d">
+<title>GETIS | Family Portal</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f3ed;color:#28352b;
+font-family:Arial,"Microsoft YaHei",sans-serif}
+header{background:#17251d;color:#e9d8a6;
+padding:28px 22px}
+.logo{font-size:30px;font-weight:bold;letter-spacing:4px}
+.sub{font-size:12px;letter-spacing:3px;margin-top:8px}
+main{padding:22px;max-width:650px;margin:auto}
+h2{font-size:20px}
+.panel{background:white;border:1px solid #e5dfd0;
+border-radius:12px;padding:18px;margin:16px 0}
+input{width:100%;padding:13px;border:1px solid #ccc;
+border-radius:7px;margin:10px 0;font-size:15px}
+button{background:#b69a5c;color:white;border:0;
+padding:13px 18px;border-radius:7px;font-size:15px}
+.nav{display:grid;grid-template-columns:1fr 1fr;
+gap:12px}
+.nav button{background:#fff;color:#344538;
+border:1px solid #ddd;text-align:left}
+.small{font-size:12px;color:#888}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">GETIS</div>
+<div class="sub">FAMILY DIGITAL PORTAL</div>
+</header>
+<main>
+<h2>家族数字门户</h2>
+<p class="small">PRIVATE FAMILY MANAGEMENT SYSTEM</p>
+
+<section class="panel" id="setup">
+<h3>首次启动配置</h3>
+<p>请输入 GETIS 服务器地址</p>
+<input id="server" type="url"
+placeholder="https://your-server.example.com">
+<button onclick="saveServer()">保存服务器地址</button>
+<p class="small">服务器地址可以在系统设置中修改。</p>
+</section>
+
+<section class="panel">
+<h3>欢迎进入 GETIS</h3>
+<p>家族 · 档案 · 成员 · 权限 · 传承</p>
+<div class="nav">
+<button onclick="show('成员管理')">成员管理</button>
+<button onclick="show('家族档案')">家族档案</button>
+<button onclick="show('权限中心')">权限中心</button>
+<button onclick="show('系统设置')">系统设置</button>
+</div>
+</section>
+
+<section class="panel" id="content">
+<h3>系统状态</h3>
+<p id="status">本地门户已启动，等待服务器配置。</p>
+</section>
+</main>
+
+<script>
+const server=document.getElementById('server');
+const saved=localStorage.getItem('getis_server');
+if(saved) {
+ server.value=saved;
+ document.getElementById('status').textContent=
+ '已保存服务器地址：'+saved;
+}
+function saveServer(){
+ const value=server.value.trim();
+ if(!value || !/^https?:\/\//i.test(value)){
+ alert('请输入有效的服务器地址（以 http:// 或 https:// 开头）');
+ return;
+ }
+ localStorage.setItem('getis_server',value);
+ document.getElementById('status').textContent=
+ '服务器地址已保存在本机：'+value;
+ alert('配置已保存');
+}
+function show(name){
+ document.getElementById('content').innerHTML=
+ '<h3>'+name+'</h3><p>模块已建立入口，等待后续开发。</p>';
+}
+</script>
+</body>
+</html>
