@@ -1,8 +1,9 @@
 {
+  "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "getis-family-portal",
+  "main": "src/worker.js",
   "compatibility_date": "2026-11-25",
-  "assets": {
-    "directory": "./",
-    "not_found_handling": "404-page"
-  }
+  "assets": {"directory":"./public","binding":"ASSETS","run_worker_first":true},
+  "d1_databases":[{"binding":"DB","database_name":"getis-family-db","database_id":"REPLACE_WITH_D1_DATABASE_ID"}],
+  "r2_buckets":[{"binding":"FILES","bucket_name":"getis-family-files"}]
 }
